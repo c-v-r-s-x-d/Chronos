@@ -1,0 +1,136 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+        xmlns:apps="clr-namespace:Chronos.App.Apps"
+        x:Class="Chronos.App.Views.AddAppDialog"
+        x:DataType="vm:AddAppViewModel"
+        Width="560"
+        Height="520"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Title="{Binding Rules.Text.AddAppTitle}">
+  <!-- A tab per way of naming a program, the two match kinds, the refusal, the buttons. -->
+  <Grid RowDefinitions="*,Auto,Auto,Auto" Margin="20,12,20,20">
+    <TabControl Grid.Row="0" Classes="tabs" SelectedIndex="{Binding TabIndex, Mode=TwoWay}">
+      <TabItem Header="{Binding Rules.Text.TabRunning}">
+        <DockPanel>
+          <TextBox DockPanel.Dock="Top"
+                   Margin="0,0,0,6"
+                   Text="{Binding RunningFilter}"
+                   PlaceholderText="{Binding Rules.Text.SearchPlaceholder}" />
+          <ListBox Classes="running"
+                   ItemsSource="{Binding VisibleRunning}"
+                   SelectedItem="{Binding SelectedRunning, Mode=TwoWay}"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.Styles>
+              <Style Selector="ListBoxItem" x:DataType="apps:RunningApp">
+                <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
+              </Style>
+            </ListBox.Styles>
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="apps:RunningApp">
+                <!-- The path as well as the name: two programs of the same name in different
+                     folders are two lines, and may be two different rules. It goes no further than
+                     this window. -->
+                <StackPanel>
+                  <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                  <TextBlock Classes="muted" Text="{Binding Path}" TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </DockPanel>
+      </TabItem>
+
+      <!-- The two that open a picker are handled in the code behind: a file picker is a control,
+           and the view models do not know Avalonia exists. -->
+      <TabItem Header="{Binding Rules.Text.TabExecutable}">
+        <StackPanel Spacing="8">
+          <Button Content="{Binding Rules.Text.ChooseFile}" Click="OnChooseExecutable" />
+          <!-- Wrapped before it is cut: the end of a path is the program, the part worth reading. -->
+          <TextBlock Classes="muted"
+                     Text="{Binding ChosenExecutable}"
+                     TextTrimming="CharacterEllipsis"
+                     TextWrapping="Wrap"
+                     MaxLines="4"
+                     ToolTip.Tip="{Binding ChosenExecutable}" />
+        </StackPanel>
+      </TabItem>
+
+      <TabItem Header="{Binding Rules.Text.TabShortcut}">
+        <StackPanel Spacing="8">
+          <Button Content="{Binding Rules.Text.ChooseFile}" Click="OnChooseShortcut" />
+          <TextBlock Classes="muted"
+                     Text="{Binding ChosenShortcut}"
+                     TextTrimming="CharacterEllipsis"
+                     ToolTip.Tip="{Binding ChosenShortcut}" />
+          <!-- Where it leads, before anything is added: the rule is made for this, not for the shortcut. -->
+          <TextBlock Text="{Binding ShortcutLeadsTo}"
+                     TextTrimming="CharacterEllipsis"
+                     TextWrapping="Wrap"
+                     MaxLines="4"
+                     ToolTip.Tip="{Binding ShortcutTarget}"
+                     IsVisible="{Binding ShortcutTarget, Converter={x:Static ObjectConverters.IsNotNull}}" />
+          <TextBlock Foreground="{DynamicResource Chronos.Error}"
+                     Text="{Binding ShortcutRefusal}"
+                     TextWrapping="Wrap"
+                     IsVisible="{Binding ShortcutRefusal, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+        </StackPanel>
+      </TabItem>
+
+      <TabItem Header="{Binding Rules.Text.TabName}">
+        <TextBox VerticalAlignment="Top"
+                 Text="{Binding Name}"
+                 PlaceholderText="{Binding Rules.Text.NewAppPlaceholder}" />
+      </TabItem>
+    </TabControl>
+
+    <!-- Each match kind comes with the sentence saying what it will mean: they look the same when chosen and differ afterwards. -->
+    <StackPanel Grid.Row="1" Margin="0,8,0,0" Spacing="6">
+      <TextBlock Text="{Binding Rules.Text.MatchKindHeading}" TextWrapping="Wrap" />
+      <ListBox Classes="kinds"
+               ItemsSource="{Binding MatchKinds}"
+               SelectedIndex="{Binding SelectedMatchKind, Mode=TwoWay}"
+               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox.Styles>
+          <!-- "Only this file" is the second of the two, and is off where there is no file to name. -->
+          <Style Selector="ListBoxItem:nth-child(2)">
+            <Setter Property="IsEnabled" Value="{Binding $parent[ListBox].((vm:AddAppViewModel)DataContext).CanChooseFullPath}" />
+          </Style>
+          <Style Selector="ListBoxItem" x:DataType="apps:MatchKindLine">
+            <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
+          </Style>
+        </ListBox.Styles>
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="apps:MatchKindLine">
+            <StackPanel>
+              <TextBlock FontWeight="SemiBold" Text="{Binding Name}" TextWrapping="Wrap" />
+              <TextBlock Classes="muted" Text="{Binding Explanation}" TextWrapping="Wrap" />
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </StackPanel>
+
+    <!-- A refusal is read here, in the window it was made in, and the window stays open. -->
+    <TextBlock Grid.Row="2"
+               Margin="0,4,0,0"
+               Foreground="{DynamicResource Chronos.Error}"
+               Text="{Binding Rules.Notice}"
+               TextWrapping="Wrap"
+               IsVisible="{Binding Rules.HasNotice}" />
+
+    <StackPanel Grid.Row="3"
+                Margin="0,10,0,0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                Spacing="8">
+      <Button Content="{Binding Rules.Text.Cancel}" IsCancel="True" Click="OnCancel" />
+      <Button Classes="primary"
+              Content="{Binding Rules.Text.AddApp}"
+              IsDefault="True"
+              Command="{Binding AddCommand}" />
+    </StackPanel>
+  </Grid>
+</Window>

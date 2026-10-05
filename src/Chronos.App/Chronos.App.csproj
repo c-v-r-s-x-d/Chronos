@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RootNamespace>Chronos.App</RootNamespace>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <!-- Tray and window icons come from the repository assets, not copies. -->
+  <ItemGroup>
+    <AvaloniaResource Include="..\..\assets\tray-on-32.png" Link="Assets\tray-on-32.png" />
+    <AvaloniaResource Include="..\..\assets\tray-off-32.png" Link="Assets\tray-off-32.png" />
+    <AvaloniaResource Include="..\..\assets\chronos.ico" Link="Assets\chronos.ico" />
+    <!-- Link as well as LinkBase: Avalonia reads only Link, and without it the fonts sit under "..\..\assets". -->
+    <AvaloniaResource Include="..\..\assets\fonts\*.ttf" LinkBase="Assets\Fonts" Link="Assets\Fonts\%(Filename)%(Extension)" />
+    <!-- OFL 1.1 asks for the licence to travel with the fonts; the installer takes the whole publish folder. -->
+    <None Include="..\..\assets\fonts\OFL-*.txt" LinkBase="licenses" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+
+    <!-- Same logging stack as the service; see src/Chronos.Service/ServiceLogging.cs. -->
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chronos.Ipc\Chronos.Ipc.csproj" />
+  </ItemGroup>
+
+  <!--
+    Strongly typed resources without Visual Studio, so a misspelled key is a compile error.
+    Strings.ru.resx becomes the Russian satellite on its own.
+  -->
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings.resx">
+      <Generator>MSBuild:Compile</Generator>
+      <StronglyTypedFileName>$(IntermediateOutputPath)\Strings.Designer.cs</StronglyTypedFileName>
+      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
+      <StronglyTypedNamespace>Chronos.App.Resources</StronglyTypedNamespace>
+      <StronglyTypedClassName>Strings</StronglyTypedClassName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- The design-time build skips resource generation; it uses the class from the last real build. -->
+  <ItemGroup Condition="'$(DesignTimeBuild)' == 'true'">
+    <Compile Include="$(IntermediateOutputPath)Strings.Designer.cs"
+             Condition="Exists('$(IntermediateOutputPath)Strings.Designer.cs')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Chronos.App.Tests" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+        xmlns:c="using:Chronos.App.Controls"
+        x:Class="Chronos.App.Views.BlockScreen"
+        x:DataType="vm:BlockViewModel"
+        Title="{Binding Text.AppTitle}"
+        Width="440"
+        Height="190"
+        CanResize="False"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStartupLocation="CenterScreen">
+
+  <!--
+    A small window, not a full-screen one: a screen the user cannot see past would get in the way
+    of what they are doing.
+
+    No RequestedThemeVariant here or anywhere below the application: the variant is inherited, and
+    one window asking for its own is hard to notice.
+
+    Topmost because it appears when the user is starting something else. It takes no focus: it has
+    one button.
+  -->
+  <DockPanel Margin="24" LastChildFill="True">
+    <c:Hourglass DockPanel.Dock="Left" Width="34" Height="58" VerticalAlignment="Top" Margin="0,0,20,0"
+                 Progress="{Binding Progress}" />
+    <Button DockPanel.Dock="Bottom"
+            Classes="primary"
+            Content="{Binding Text.BlockDismiss}"
+            HorizontalAlignment="Right"
+            IsDefault="True"
+            IsCancel="True"
+            Click="Dismiss" />
+    <StackPanel Spacing="8">
+      <!-- The same window names a refused site. A domain runs to 253 characters, so
+           the heading gives way before the countdown and the button leave the fixed height. -->
+      <TextBlock Text="{Binding Heading}"
+                 FontSize="16"
+                 FontWeight="SemiBold"
+                 TextWrapping="Wrap"
+                 MaxLines="3"
+                 TextTrimming="CharacterEllipsis" />
+      <StackPanel Orientation="Horizontal" Spacing="12">
+        <TextBlock Classes="muted" Text="{Binding RemainingText}" TextTrimming="CharacterEllipsis" />
+        <TextBlock Classes="muted" Text="{Binding EndsAtText}" TextTrimming="CharacterEllipsis" />
+      </StackPanel>
+    </StackPanel>
+  </DockPanel>
+</Window>

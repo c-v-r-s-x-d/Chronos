@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+             xmlns:ipc="clr-namespace:Chronos.Ipc;assembly=Chronos.Ipc"
+             x:Class="Chronos.App.Views.AppsPage"
+             x:DataType="vm:AppsSection">
+  <!-- The application list; adding opens a dialog, removal as on the sites page. -->
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="32,28" Spacing="16">
+      <DockPanel>
+        <Button DockPanel.Dock="Right"
+                Classes="primary"
+                Margin="8,0,0,0"
+                VerticalAlignment="Top"
+                Content="{Binding Rules.Text.AddApp}"
+                Click="OnAdd" />
+        <TextBlock Classes="h1" Text="{Binding Rules.Text.AppsHeading}" TextWrapping="Wrap" />
+      </DockPanel>
+
+      <!-- What the service said about the last command, word for word, or this end's own refusal. -->
+      <Border Classes="card" IsVisible="{Binding Rules.HasNotice}">
+        <TextBlock Text="{Binding Rules.Notice}" TextWrapping="Wrap" />
+      </Border>
+
+      <TextBox Text="{Binding Rules.AppFilter}"
+               PlaceholderText="{Binding Rules.Text.SearchPlaceholder}"
+               IsVisible="{Binding Rules.ShowsAppSearch}" />
+
+      <TextBlock Classes="muted"
+                 Text="{Binding Rules.Text.ListEmpty}"
+                 TextWrapping="Wrap"
+                 IsVisible="{Binding !Rules.Apps.Count}" />
+      <ItemsControl ItemsSource="{Binding Rules.AppLines}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:AppLine">
+            <DockPanel Margin="0,2">
+              <Panel DockPanel.Dock="Right" Margin="8,0,0,0">
+                <Button Classes="remove"
+                        Command="{Binding $parent[ItemsControl].((vm:AppsSection)DataContext).Rules.RemoveAppCommand}"
+                        CommandParameter="{Binding Rule}"
+                        IsEnabled="{Binding $parent[ItemsControl].((vm:AppsSection)DataContext).Rules.CanRemoveRules}"
+                        ToolTip.Tip="{Binding $parent[ItemsControl].((vm:AppsSection)DataContext).Rules.Text.RemoveRule}"
+                        AutomationProperties.Name="{Binding RemoveName}">
+                  <PathIcon Classes="cross" />
+                </Button>
+                <!-- A Border carries the tooltip: the icon alone has no area to hover over. -->
+                <Border Background="Transparent"
+                        IsVisible="{Binding !$parent[ItemsControl].((vm:AppsSection)DataContext).Rules.CanRemoveRules}"
+                        ToolTip.Tip="{Binding $parent[ItemsControl].((vm:AppsSection)DataContext).Rules.Text.RemovalUnavailableShort}">
+                  <PathIcon Classes="lock" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Border>
+              </Panel>
+              <Border DockPanel.Dock="Left"
+                      Classes="letter"
+                      Margin="0,0,10,0">
+                <TextBlock Text="{Binding Letter}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+              <StackPanel>
+                <TextBlock Text="{Binding Rule.Value}"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock Classes="muted"
+                           Text="{Binding Kind}"
+                           TextTrimming="CharacterEllipsis" />
+              </StackPanel>
+            </DockPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+      <TextBlock Classes="muted"
+                 Text="{Binding Rules.RemovalUnavailable}"
+                 TextWrapping="Wrap"
+                 IsVisible="{Binding !Rules.CanRemoveRules}" />
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

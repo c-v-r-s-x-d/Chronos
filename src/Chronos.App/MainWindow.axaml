@@ -1,0 +1,143 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+        xmlns:views="clr-namespace:Chronos.App.Views"
+        x:Class="Chronos.App.MainWindow"
+        x:DataType="vm:ShellViewModel"
+        Title="{Binding Text.AppTitle}"
+        Width="880"
+        Height="600"
+        MinWidth="760"
+        MinHeight="520"
+        Background="{DynamicResource Chronos.Background}">
+
+  <!-- One template per engine state, and one per section of the screens with a sidebar. -->
+  <Window.DataTemplates>
+    <DataTemplate DataType="vm:SetupViewModel">
+      <views:SessionSetupPage />
+    </DataTemplate>
+    <DataTemplate DataType="vm:ActiveViewModel">
+      <views:SessionActivePage />
+    </DataTemplate>
+    <DataTemplate DataType="vm:WaitingViewModel">
+      <views:WaitingView />
+    </DataTemplate>
+    <DataTemplate DataType="vm:SitesSection">
+      <views:SitesPage />
+    </DataTemplate>
+    <DataTemplate DataType="vm:AppsSection">
+      <views:AppsPage />
+    </DataTemplate>
+    <DataTemplate DataType="vm:SettingsViewModel">
+      <views:SettingsPage />
+    </DataTemplate>
+  </Window.DataTemplates>
+
+  <Panel>
+    <DockPanel IsVisible="{Binding !Exit.IsWarningShowing}">
+      <!-- The sidebar. Docked, so with it hidden the page takes the whole window. -->
+      <DockPanel DockPanel.Dock="Left"
+                 Width="200"
+                 Background="{DynamicResource Chronos.Sidebar}"
+                 IsVisible="{Binding ShowsSidebar}">
+        <TextBlock DockPanel.Dock="Top"
+                   Classes="logo"
+                   Margin="20,20,20,24"
+                   Text="{Binding Text.AppTitle}" />
+        <Button DockPanel.Dock="Bottom"
+                Classes="summary"
+                Margin="12"
+                Command="{Binding GoToCommand}"
+                CommandParameter="{x:Static vm:Section.Settings}"
+                AutomationProperties.Name="{Binding Settings.ProtectionSummary}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Ellipse Width="8"
+                     Height="8"
+                     VerticalAlignment="Center"
+                     Classes.ok="{Binding Settings.ProtectionOn}"
+                     Classes.warn="{Binding Settings.ProtectionWarning}"
+                     Classes.unknown="{Binding Settings.ProtectionNeutral}" />
+            <TextBlock Classes="muted" Text="{Binding Settings.ProtectionSummary}" />
+          </StackPanel>
+        </Button>
+        <ListBox Classes="nav"
+                 ItemsSource="{Binding Sections}"
+                 SelectedIndex="{Binding SelectedSectionIndex, Mode=TwoWay}">
+          <!-- A screen reader says the section, not the record behind it. -->
+          <ListBox.Styles>
+            <Style Selector="ListBoxItem" x:DataType="vm:SectionLine">
+              <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
+            </Style>
+          </ListBox.Styles>
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="vm:SectionLine">
+              <DockPanel>
+                <!-- A Border carries the tooltip: the icon alone has no area to hover over. -->
+                <Border DockPanel.Dock="Right"
+                        Background="Transparent"
+                        IsVisible="{Binding Locked}"
+                        ToolTip.Tip="{Binding $parent[Window].((vm:ShellViewModel)DataContext).Text.RemovalUnavailableShort}">
+                  <PathIcon Classes="lock" />
+                </Border>
+                <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+              </DockPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </DockPanel>
+
+      <Panel>
+        <!-- Not a fourth screen: there is no state to draw, so this is what is here. -->
+        <TextBlock Margin="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Text="{Binding ServiceMessage}"
+                   TextWrapping="Wrap"
+                   IsVisible="{Binding IsConnecting}" />
+        <StackPanel Margin="24"
+                    MaxWidth="440"
+                    Spacing="12"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsVisible="{Binding IsServiceUnavailable}">
+          <PathIcon Classes="warning" HorizontalAlignment="Center" />
+          <TextBlock Classes="h1"
+                     Text="{Binding Text.ServiceUnavailableHeading}"
+                     TextWrapping="Wrap"
+                     TextAlignment="Center" />
+          <TextBlock Text="{Binding Text.ServiceUnavailableMeaning}" TextWrapping="Wrap" />
+          <!-- Selectable, so the command can be copied. -->
+          <SelectableTextBlock Text="{Binding Text.ServiceRecoverHint}" TextWrapping="Wrap" />
+          <TextBlock Classes="muted" Text="{Binding RetryText}" TextWrapping="Wrap" />
+        </StackPanel>
+        <ContentControl Content="{Binding Page}" IsVisible="{Binding IsServiceAvailable}" />
+      </Panel>
+    </DockPanel>
+
+    <!--
+      Replaces the screen rather than overlaying it: an overlay would need a background of its own.
+      The exit is not taken until the first button is pressed.
+    -->
+    <Panel Background="{DynamicResource Chronos.Background}" IsVisible="{Binding Exit.IsWarningShowing}">
+      <Border Classes="card"
+              Margin="24"
+              MaxWidth="440"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+        <StackPanel Spacing="16">
+          <TextBlock Classes="h1" Text="{Binding Text.ExitWarningHeading}" TextWrapping="Wrap" />
+          <TextBlock Text="{Binding Text.ExitWarning}" TextWrapping="Wrap" />
+          <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+            <Button Content="{Binding Text.ExitConfirm}" Command="{Binding Exit.ConfirmCommand}" />
+            <!-- The way back is the default, so Enter or Escape on a stray key press keeps the product. -->
+            <Button Classes="primary"
+                    Content="{Binding Text.ExitCancel}"
+                    Command="{Binding Exit.CancelCommand}"
+                    IsDefault="True"
+                    IsCancel="True" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </Panel>
+  </Panel>
+</Window>

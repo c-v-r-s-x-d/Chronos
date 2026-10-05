@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActiveHeading" xml:space="preserve">
+    <value>Идёт сессия.</value>
+  </data>
+  <data name="AddApp" xml:space="preserve">
+    <value>+ Добавить</value>
+  </data>
+  <data name="AddAppTitle" xml:space="preserve">
+    <value>Добавить приложение</value>
+  </data>
+  <data name="AddRule" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="AppsHeading" xml:space="preserve">
+    <value>Заблокированные приложения</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Chronos</value>
+  </data>
+  <data name="BlockDismiss" xml:space="preserve">
+    <value>Понятно</value>
+  </data>
+  <data name="BlockedAppFormat" xml:space="preserve">
+    <value>{0} заблокировано на время сеанса, и Chronos закрыл его.</value>
+  </data>
+  <data name="BlockedSiteFormat" xml:space="preserve">
+    <value>Сайт {0} заблокирован на время сеанса, поэтому Chronos не дал его открыть.</value>
+  </data>
+  <data name="CancelUnlock" xml:space="preserve">
+    <value>Продолжить сессию</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ChooseExecutable" xml:space="preserve">
+    <value>Выбрать программу...</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Выбрать файл...</value>
+  </data>
+  <data name="ChooseShortcut" xml:space="preserve">
+    <value>Выбрать ярлык...</value>
+  </data>
+  <data name="CoolDownNoticeFormat" xml:space="preserve">
+    <value>Снятие вступит в силу через {0} после запроса.</value>
+  </data>
+  <data name="ExecutableFiles" xml:space="preserve">
+    <value>Программы</value>
+  </data>
+  <data name="ExitCancel" xml:space="preserve">
+    <value>Остаться</value>
+  </data>
+  <data name="ExitConfirm" xml:space="preserve">
+    <value>Всё равно выйти</value>
+  </data>
+  <data name="ExitWarning" xml:space="preserve">
+    <value>Выход не снимает блокировку: служба доведёт сессию до конца. Прекратится только то, что вы видите, - экраны блокировки и уведомления, - пока Chronos не запустят снова.</value>
+  </data>
+  <data name="ExitWarningHeading" xml:space="preserve">
+    <value>Выйти из Chronos?</value>
+  </data>
+  <data name="ExtendSession" xml:space="preserve">
+    <value>Продлить</value>
+  </data>
+  <data name="GeneralHeading" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="HourFew" xml:space="preserve">
+    <value>часа</value>
+  </data>
+  <data name="HourMany" xml:space="preserve">
+    <value>часов</value>
+  </data>
+  <data name="HourOne" xml:space="preserve">
+    <value>час</value>
+  </data>
+  <data name="HourOneAccusative" xml:space="preserve">
+    <value>час</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="LanguageHeading" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="LayerApps" xml:space="preserve">
+    <value>Закрытие приложений</value>
+  </data>
+  <data name="LayerAvailable" xml:space="preserve">
+    <value>работает</value>
+  </data>
+  <data name="LayerDns" xml:space="preserve">
+    <value>DNS-резолвер</value>
+  </data>
+  <data name="LayerHosts" xml:space="preserve">
+    <value>Файл hosts</value>
+  </data>
+  <data name="LayerReasonAppsNoEventSource" xml:space="preserve">
+    <value>Windows не дала Chronos источника событий о запуске приложений.</value>
+  </data>
+  <data name="LayerReasonDnsBackupOnePlace" xml:space="preserve">
+    <value>Копия сетевых настроек сохранена в одном месте вместо двух.</value>
+  </data>
+  <data name="LayerReasonDnsLoopbackBlocked" xml:space="preserve">
+    <value>DNS-запросы к 127.0.0.1 не доходят до резолвера Chronos — скорее всего, их отсекает VPN.</value>
+  </data>
+  <data name="LayerReasonDnsNoUpstream" xml:space="preserve">
+    <value>Ни у одного сетевого подключения нет своего DNS-сервера, который можно оставить запасным.</value>
+  </data>
+  <data name="LayerReasonDnsPortBusy" xml:space="preserve">
+    <value>Порт 53, нужный резолверу Chronos, занят другой программой.</value>
+  </data>
+  <data name="LayerReasonDnsSettingsRefused" xml:space="preserve">
+    <value>Windows не приняла новые настройки DNS на одном из сетевых подключений.</value>
+  </data>
+  <data name="LayerReasonHostsDirectoryMissing" xml:space="preserve">
+    <value>Папки, в которой лежит файл hosts, нет.</value>
+  </data>
+  <data name="LayerReasonHostsNotWritable" xml:space="preserve">
+    <value>Файл hosts не открывается на запись: его держит другая программа.</value>
+  </data>
+  <data name="LayerReasonUnavailable" xml:space="preserve">
+    <value>Слой сообщил о недоступности, не назвав причину.</value>
+  </data>
+  <data name="LayerReasonUnhandled" xml:space="preserve">
+    <value>Слой остановился с ошибкой, которую служба не распознала.</value>
+  </data>
+  <data name="LayerReasonWfpDisabledByUser" xml:space="preserve">
+    <value>Отключён в настройках.</value>
+  </data>
+  <data name="LayerReasonWfpEngineUnavailable" xml:space="preserve">
+    <value>Windows не пустила Chronos в свой механизм фильтрации.</value>
+  </data>
+  <data name="LayersUnknown" xml:space="preserve">
+    <value>Ни один слой ещё не отчитался, поэтому неизвестно, что работает на этой машине.</value>
+  </data>
+  <data name="LayerReady" xml:space="preserve">
+    <value>доступен</value>
+  </data>
+  <data name="LayerNotWorking" xml:space="preserve">
+    <value>не работает</value>
+  </data>
+  <data name="LayerUnavailable" xml:space="preserve">
+    <value>недоступен</value>
+  </data>
+  <data name="LayerWfp" xml:space="preserve">
+    <value>Брандмауэр</value>
+  </data>
+  <data name="ListEmpty" xml:space="preserve">
+    <value>Пока пусто.</value>
+  </data>
+  <data name="MatchFileName" xml:space="preserve">
+    <value>Любая программа с таким именем</value>
+  </data>
+  <data name="MatchFileNameExplained" xml:space="preserve">
+    <value>Где бы она ни была установлена. Правило переживёт обновление или переустановку в другую папку — но заодно поймает и другую программу, которая называется так же.</value>
+  </data>
+  <data name="MatchFullPath" xml:space="preserve">
+    <value>Только этот файл</value>
+  </data>
+  <data name="MatchFullPathExplained" xml:space="preserve">
+    <value>Именно этот файл и никакой другой. Правило перестанет срабатывать, как только программу перенесут, обновят в новую папку или установят заново в другом месте.</value>
+  </data>
+  <data name="MatchKindHeading" xml:space="preserve">
+    <value>Как правило сопоставляется</value>
+  </data>
+  <data name="MinuteFew" xml:space="preserve">
+    <value>минуты</value>
+  </data>
+  <data name="MinuteMany" xml:space="preserve">
+    <value>минут</value>
+  </data>
+  <data name="MinuteOne" xml:space="preserve">
+    <value>минута</value>
+  </data>
+  <data name="MinuteOneAccusative" xml:space="preserve">
+    <value>минуту</value>
+  </data>
+  <data name="NewAppPlaceholder" xml:space="preserve">
+    <value>приложение, например steam.exe</value>
+  </data>
+  <data name="NewSitePlaceholder" xml:space="preserve">
+    <value>сайт, например reddit.com</value>
+  </data>
+  <data name="NoticeCommandUnknown" xml:space="preserve">
+    <value>Служба не знает этой команды — возможно, версия службы старше этого окна.</value>
+  </data>
+  <data name="NoticeConfigCoolDownAppliesNextSession" xml:space="preserve">
+    <value>Идущая сессия сохраняет прежнюю задержку снятия; новая действует со следующей сессии.</value>
+  </data>
+  <data name="NoticeConfigCoolDownClamped" xml:space="preserve">
+    <value>Задержка снятия блокировки установлена на {0} мин. — ближайшее допустимое значение.</value>
+  </data>
+  <data name="NoticeConfigLanguageBlank" xml:space="preserve">
+    <value>Выберите язык.</value>
+  </data>
+  <data name="NoticeConfigSessionDurationClamped" xml:space="preserve">
+    <value>Длительность сессии по умолчанию установлена на {0} мин. — ближайшее допустимое значение.</value>
+  </data>
+  <data name="NoticeConfigSettingsMissing" xml:space="preserve">
+    <value>В запросе на изменение настроек нет самих настроек.</value>
+  </data>
+  <data name="NoticeRequestEmpty" xml:space="preserve">
+    <value>Запрос к службе оказался пустым.</value>
+  </data>
+  <data name="NoticeRequestInvalidJson" xml:space="preserve">
+    <value>Служба не смогла прочитать запрос.</value>
+  </data>
+  <data name="NoticeRulesAddWrongState" xml:space="preserve">
+    <value>Добавить правило в сессию можно, только пока она идёт.</value>
+  </data>
+  <data name="NoticeRulesAppKindUnknown" xml:space="preserve">
+    <value>Служба не знает такого вида правила для приложения.</value>
+  </data>
+  <data name="NoticeRulesAppMissing" xml:space="preserve">
+    <value>В запросе не указано приложение.</value>
+  </data>
+  <data name="NoticeRulesAppNotFound" xml:space="preserve">
+    <value>Правила для этого приложения в списке нет.</value>
+  </data>
+  <data name="NoticeRulesAppProtected" xml:space="preserve">
+    <value>Это приложение защищено, его нельзя заблокировать.</value>
+  </data>
+  <data name="NoticeRulesAppProtectedSystemDirectory" xml:space="preserve">
+    <value>Это приложение находится в системной папке Windows, поэтому его нельзя заблокировать.</value>
+  </data>
+  <data name="NoticeRulesAppProtectedSystemFile" xml:space="preserve">
+    <value>Это приложение нужно Windows или самому Chronos, поэтому его нельзя заблокировать.</value>
+  </data>
+  <data name="NoticeRulesAppValueBlank" xml:space="preserve">
+    <value>Выберите приложение.</value>
+  </data>
+  <data name="NoticeRulesFrozen" xml:space="preserve">
+    <value>Сессия только что закончилась, и блокировка ещё снимается. Попробуйте чуть позже.</value>
+  </data>
+  <data name="NoticeRulesRemovalWaitsForNextSession" xml:space="preserve">
+    <value>Правило удалено из списка. Идущая сессия сохранит его до своего окончания.</value>
+  </data>
+  <data name="NoticeRulesSiteDomainBlank" xml:space="preserve">
+    <value>Введите адрес сайта.</value>
+  </data>
+  <data name="NoticeRulesSiteMissing" xml:space="preserve">
+    <value>В запросе не указан сайт.</value>
+  </data>
+  <data name="NoticeRulesSiteNotFound" xml:space="preserve">
+    <value>Правила для этого сайта в списке нет.</value>
+  </data>
+  <data name="NoticeSessionCannotShorten" xml:space="preserve">
+    <value>Сессию можно только продлить, но не сократить.</value>
+  </data>
+  <data name="NoticeSessionCoolDownClamped" xml:space="preserve">
+    <value>Задержка снятия блокировки установлена на {0} мин. — ближайшее допустимое значение.</value>
+  </data>
+  <data name="NoticeSessionDurationClamped" xml:space="preserve">
+    <value>Длительность сессии установлена на {0} мин. — ближайшее допустимое значение.</value>
+  </data>
+  <data name="NoticeSessionEmptyBlockList" xml:space="preserve">
+    <value>Блокировать нечего. Сначала добавьте сайт или приложение.</value>
+  </data>
+  <data name="NoticeSessionEndClamped" xml:space="preserve">
+    <value>Сессия не может длиться дольше {0} мин., поэтому теперь она закончится на этом пределе.</value>
+  </data>
+  <data name="NoticeSessionExtendNeedsMinutes" xml:space="preserve">
+    <value>Продлить сессию можно только на положительное число минут.</value>
+  </data>
+  <data name="NoticeSessionExtendWrongState" xml:space="preserve">
+    <value>Нет идущей сессии, которую можно продлить.</value>
+  </data>
+  <data name="NoticeSessionNoneToExtend" xml:space="preserve">
+    <value>Нет сессии, которую можно продлить.</value>
+  </data>
+  <data name="NoticeSessionProtectedAppSkipped" xml:space="preserve">
+    <value>Приложение {0} защищено и не вошло в сессию.</value>
+  </data>
+  <data name="NoticeSessionStartWrongState" xml:space="preserve">
+    <value>Сессия уже идёт, или блокировка прошлой сессии ещё снимается.</value>
+  </data>
+  <data name="NoticeUnlockCancelWrongState" xml:space="preserve">
+    <value>Отменять нечего: запроса на снятие блокировки нет.</value>
+  </data>
+  <data name="NoticeUnlockRequestWrongState" xml:space="preserve">
+    <value>Попросить снять блокировку можно только во время сессии, если запрос ещё не отправлен.</value>
+  </data>
+  <data name="PresetGames" xml:space="preserve">
+    <value>Игры</value>
+  </data>
+  <data name="PresetNews" xml:space="preserve">
+    <value>Новости</value>
+  </data>
+  <data name="PresetOutcomeFormat" xml:space="preserve">
+    <value>Добавлено: {0}. Уже были: {1}.</value>
+  </data>
+  <data name="PresetSocial" xml:space="preserve">
+    <value>Социальные сети</value>
+  </data>
+  <data name="PresetVideo" xml:space="preserve">
+    <value>Видео и стриминг</value>
+  </data>
+  <data name="ProtectedAppFormat" xml:space="preserve">
+    <value>{0} заблокировать нельзя: без него не работает Windows или сам Chronos.</value>
+  </data>
+  <data name="BlockingMethodsHeading" xml:space="preserve">
+    <value>Способы блокировки</value>
+  </data>
+  <data name="ProtectionHeading" xml:space="preserve">
+    <value>Защита</value>
+  </data>
+  <data name="ProtectionOff" xml:space="preserve">
+    <value>Защита выключена</value>
+  </data>
+  <data name="ProtectionOn" xml:space="preserve">
+    <value>Защита включена</value>
+  </data>
+  <data name="ProtectionPartial" xml:space="preserve">
+    <value>Защита включена частично</value>
+  </data>
+  <data name="ProtectionUnknown" xml:space="preserve">
+    <value>Состояние неизвестно</value>
+  </data>
+  <data name="RemovalUnavailable" xml:space="preserve">
+    <value>Пока идёт сессия, правила из списка не убираются. Удаление подействовало бы только со следующей, а эта сессия останется со списком, с которым началась.</value>
+  </data>
+  <data name="RemovalUnavailableShort" xml:space="preserve">
+    <value>Удалять нельзя до конца сессии</value>
+  </data>
+  <data name="RemoveRule" xml:space="preserve">
+    <value>Убрать</value>
+  </data>
+  <data name="RequestUnlock" xml:space="preserve">
+    <value>Попросить снятие…</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="SecondFew" xml:space="preserve">
+    <value>секунды</value>
+  </data>
+  <data name="SecondMany" xml:space="preserve">
+    <value>секунд</value>
+  </data>
+  <data name="SecondOne" xml:space="preserve">
+    <value>секунда</value>
+  </data>
+  <data name="SecondOneAccusative" xml:space="preserve">
+    <value>секунду</value>
+  </data>
+  <data name="SectionApps" xml:space="preserve">
+    <value>Приложения</value>
+  </data>
+  <data name="SectionSession" xml:space="preserve">
+    <value>Сессия</value>
+  </data>
+  <data name="SectionSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SectionSites" xml:space="preserve">
+    <value>Сайты</value>
+  </data>
+  <data name="ServiceAvailable" xml:space="preserve">
+    <value>Служба Chronos на связи.</value>
+  </data>
+  <data name="ServiceConnecting" xml:space="preserve">
+    <value>Идёт поиск службы Chronos...</value>
+  </data>
+  <data name="ServiceUnavailableHeading" xml:space="preserve">
+    <value>Служба Chronos недоступна</value>
+  </data>
+  <data name="ServiceUnavailableMeaning" xml:space="preserve">
+    <value>Начатая сессия продолжает блокировать: блокировку держит сама служба, а это окно лишь показывает её. Пока службы нет, это окно ничего не покажет и не изменит.</value>
+  </data>
+  <data name="ServiceRecoverHint" xml:space="preserve">
+    <value>Проверьте, запущена ли служба. Если её удалили или она повреждена, выполните «chronos recover» в командной строке от имени администратора.</value>
+  </data>
+  <data name="ServiceRetryFormat" xml:space="preserve">
+    <value>Следующая попытка через {0}.</value>
+  </data>
+  <data name="ServiceRetryNow" xml:space="preserve">
+    <value>Подключаемся…</value>
+  </data>
+  <data name="SessionFinishing" xml:space="preserve">
+    <value>Сессия завершается.</value>
+  </data>
+  <data name="SessionRemainingFormat" xml:space="preserve">
+    <value>Осталось {0}.</value>
+  </data>
+  <data name="ShortcutFiles" xml:space="preserve">
+    <value>Ярлыки</value>
+  </data>
+  <data name="ShortcutNoTarget" xml:space="preserve">
+    <value>Этот ярлык указывает не на программу. У ярлыка на папку или на элемент Windows нет исполняемого файла, который можно заблокировать.</value>
+  </data>
+  <data name="ShortcutNotAShortcut" xml:space="preserve">
+    <value>Этот файл не ярлык, и следовать нечему. Выберите сам ярлык или файл программы.</value>
+  </data>
+  <data name="ShortcutPointsTo" xml:space="preserve">
+    <value>Ведёт к: {0}</value>
+  </data>
+  <data name="ShortcutTargetMissing" xml:space="preserve">
+    <value>Программы, на которую указывает этот ярлык, на компьютере больше нет. Установите её заново или выберите её файл напрямую.</value>
+  </data>
+  <data name="ShorteningUnavailable" xml:space="preserve">
+    <value>Сессию можно продлить, но не сократить. Выход — запрос на снятие блокировки, и он занимает столько, сколько занимает.</value>
+  </data>
+  <data name="SiteNoticesUnavailable" xml:space="preserve">
+    <value>Chronos не сообщит о попытке открыть заблокированный сайт: её замечает только DNS-резолвер, а он сейчас не работает или ещё не проверен. Что по-прежнему может блокировать сайты, видно в списке выше.</value>
+  </data>
+  <data name="SitesHeading" xml:space="preserve">
+    <value>Заблокированные сайты</value>
+  </data>
+  <data name="StartSession" xml:space="preserve">
+    <value>Начать сессию</value>
+  </data>
+  <data name="TabExecutable" xml:space="preserve">
+    <value>Файл .exe</value>
+  </data>
+  <data name="TabName" xml:space="preserve">
+    <value>По имени</value>
+  </data>
+  <data name="TabRunning" xml:space="preserve">
+    <value>Запущенные</value>
+  </data>
+  <data name="TabShortcut" xml:space="preserve">
+    <value>Ярлык</value>
+  </data>
+  <data name="TrayActiveFormat" xml:space="preserve">
+    <value>сессия идёт, осталось {0}</value>
+  </data>
+  <data name="TrayConnecting" xml:space="preserve">
+    <value>идёт поиск службы</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>Выйти из Chronos</value>
+  </data>
+  <data name="TrayIdle" xml:space="preserve">
+    <value>сессия не идёт</value>
+  </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Открыть Chronos</value>
+  </data>
+  <data name="TrayUnknown" xml:space="preserve">
+    <value>состояние блокировки отсюда не видно</value>
+  </data>
+  <data name="UnlockRemainingFormat" xml:space="preserve">
+    <value>Блокировка снимется через {0}.</value>
+  </data>
+  <data name="SiteOne" xml:space="preserve">
+    <value>сайт</value>
+  </data>
+  <data name="SiteFew" xml:space="preserve">
+    <value>сайта</value>
+  </data>
+  <data name="SiteMany" xml:space="preserve">
+    <value>сайтов</value>
+  </data>
+  <data name="AppOne" xml:space="preserve">
+    <value>приложение</value>
+  </data>
+  <data name="AppFew" xml:space="preserve">
+    <value>приложения</value>
+  </data>
+  <data name="AppMany" xml:space="preserve">
+    <value>приложений</value>
+  </data>
+  <data name="SessionSummaryFormat" xml:space="preserve">
+    <value>Заблокирует {0} и {1} до {2}.</value>
+  </data>
+  <data name="NothingToBlock" xml:space="preserve">
+    <value>В списках пока пусто, поэтому сессия ничего не заблокирует.</value>
+  </data>
+  <data name="CustomDuration" xml:space="preserve">
+    <value>Своя</value>
+  </data>
+  <data name="GoToSites" xml:space="preserve">
+    <value>Добавить сайты</value>
+  </data>
+  <data name="GoToApps" xml:space="preserve">
+    <value>Добавить приложения</value>
+  </data>
+  <data name="MinutesLabel" xml:space="preserve">
+    <value>минут</value>
+  </data>
+  <data name="NewSessionHeading" xml:space="preserve">
+    <value>Новая сессия</value>
+  </data>
+  <data name="SessionSummaryOneFormat" xml:space="preserve">
+    <value>Заблокирует {0} до {1}.</value>
+  </data>
+  <data name="EndsAtFormat" xml:space="preserve">
+    <value>до {0}</value>
+  </data>
+  <data name="ExtendHeading" xml:space="preserve">
+    <value>Продлить</value>
+  </data>
+  <data name="CustomExtend" xml:space="preserve">
+    <value>Своё…</value>
+  </data>
+  <data name="UnlockHeading" xml:space="preserve">
+    <value>Снятие через</value>
+  </data>
+  <data name="RemainingCaption" xml:space="preserve">
+    <value>осталось</value>
+  </data>
+  <data name="RemainingCaptionFormat" xml:space="preserve">
+    <value>осталось · {0}</value>
+  </data>
+  <data name="RemoveRuleFormat" xml:space="preserve">
+    <value>Убрать {0}</value>
+  </data>
+</root>

@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+             xmlns:c="using:Chronos.App.Controls"
+             x:Class="Chronos.App.Views.SessionActivePage"
+             x:DataType="vm:ActiveViewModel">
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="32,28" Spacing="20" HorizontalAlignment="Center">
+      <TextBlock Classes="h1" HorizontalAlignment="Center" Text="{Binding Text.ActiveHeading}" TextWrapping="Wrap" />
+
+      <StackPanel Orientation="Horizontal" Spacing="28" HorizontalAlignment="Center">
+        <c:Hourglass Width="84" Height="144" Progress="{Binding Progress}" />
+        <StackPanel VerticalAlignment="Center" Spacing="4">
+          <!-- Digits on the screen; the sentence is what a screen reader says for them. -->
+          <TextBlock Classes="timer" Text="{Binding RemainingDigits}" AutomationProperties.Name="{Binding RemainingText}" />
+          <TextBlock Classes="muted" Text="{Binding RemainingCaption}" />
+        </StackPanel>
+      </StackPanel>
+
+      <!-- The Ended state: a word on this screen rather than a screen of its own. -->
+      <TextBlock HorizontalAlignment="Center"
+                 Text="{Binding Text.SessionFinishing}"
+                 TextWrapping="Wrap"
+                 IsVisible="{Binding IsFinishing}" />
+
+      <!-- What the service said about the last command here (an extension it clamped). -->
+      <TextBlock HorizontalAlignment="Center" Text="{Binding Notice}" TextWrapping="Wrap" IsVisible="{Binding HasNotice}" />
+
+      <!-- Longer is offered; shorter is explained rather than left out, so someone looking to cut a session short finds an answer. -->
+      <StackPanel Spacing="12" IsVisible="{Binding !IsFinishing}">
+        <TextBlock Classes="muted" HorizontalAlignment="Center" Text="{Binding Text.ExtendHeading}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+          <ItemsControl ItemsSource="{Binding ExtendChoices}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:DurationLine">
+                <Button Classes="chip"
+                        Content="{Binding Name}"
+                        Command="{Binding $parent[ItemsControl].((vm:ActiveViewModel)DataContext).ExtendByCommand}"
+                        CommandParameter="{Binding}" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <ToggleButton Classes="chip" VerticalAlignment="Top"
+                        Content="{Binding Text.CustomExtend}"
+                        IsChecked="{Binding IsCustomExtendOpen}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center"
+                    IsVisible="{Binding IsCustomExtendOpen}">
+          <NumericUpDown Value="{Binding ExtendMinutes}" Minimum="1" Maximum="1440" Increment="15" Width="140" FormatString="0" />
+          <Button Content="{Binding Text.ExtendSession}" Command="{Binding ExtendCommand}" />
+        </StackPanel>
+
+        <Button HorizontalAlignment="Center" Content="{Binding Text.RequestUnlock}" Command="{Binding RequestUnlockCommand}" />
+        <TextBlock Classes="muted" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
+                   Text="{Binding CoolDownNotice}" />
+        <TextBlock Classes="muted" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
+                   Text="{Binding Text.ShorteningUnavailable}" />
+      </StackPanel>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

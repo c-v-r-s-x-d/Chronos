@@ -1,0 +1,71 @@
+<Project Sdk="WixToolset.Sdk/5.0.2">
+
+  <PropertyGroup>
+    <OutputName>Chronos</OutputName>
+
+    <!--
+      Must be explicit: `wix build` accepts 64-bit components without a platform in the summary
+      template, but the MSBuild path runs the ICE validators and fails with
+      WIX0204 (ICE80: 64 bit component but the Template Summary Property lacks Intel64 or x64).
+    -->
+    <InstallerPlatform>x64</InstallerPlatform>
+
+    <!-- Where `dotnet publish` stages the three applications. Under obj so .gitignore covers it. -->
+    <ChronosStageDir>$(MSBuildProjectDirectory)\obj\publish</ChronosStageDir>
+
+    <DefineConstants>$(DefineConstants);PublishDir=$(ChronosStageDir);ProductVersion=$(Version)</DefineConstants>
+
+    <!-- ICE61 objects to AllowSameVersionUpgrades, which is deliberate: a rebuild of the same version replaces the installed one instead of installing beside it. -->
+    <SuppressIces>ICE61</SuppressIces>
+  </PropertyGroup>
+
+  <!--
+    WixToolset.Util.wixext, used only for util:CloseApplication. RemoveFiles cannot delete a running
+    executable, and Chronos.App normally runs from autostart: without this, uninstall shows the
+    files-in-use dialog, or under /qn schedules deletion for the next reboot and leaves a live
+    process behind. The service is registered by the product, since util:ServiceConfig cannot set
+    a different restart delay per attempt.
+  -->
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Util.wixext" Version="5.0.2" />
+  </ItemGroup>
+
+  <!--
+    The three applications are published into one directory. Self-contained for win-x64, so the
+    machine needs no .NET installed; the runtime is then patched only by a new Chronos release.
+
+    Published, not copied from bin: EventLog.CreateEventSource writes the path of
+    System.Diagnostics.EventLog.Messages.dll into HKLM, and only publish puts it beside the programs.
+    Without it Event Viewer cannot render Chronos entries.
+
+    Exec, not the MSBuild task, to avoid two restores fighting over the same obj directories.
+
+    No trimming: Avalonia and JSON serialization use reflection.
+  -->
+  <PropertyGroup>
+    <ChronosPublishArgs>-c $(Configuration) -r win-x64 --self-contained -o &quot;$(ChronosStageDir)&quot; --nologo</ChronosPublishArgs>
+  </PropertyGroup>
+
+  <Target Name="PublishChronos" BeforeTargets="BeforeBuild">
+    <RemoveDir Directories="$(ChronosStageDir)" />
+
+    <Exec Command="dotnet publish &quot;$(MSBuildProjectDirectory)\..\Chronos.Service\Chronos.Service.csproj&quot; $(ChronosPublishArgs)" />
+    <Exec Command="dotnet publish &quot;$(MSBuildProjectDirectory)\..\Chronos.Cli\Chronos.Cli.csproj&quot; $(ChronosPublishArgs)" />
+    <Exec Command="dotnet publish &quot;$(MSBuildProjectDirectory)\..\Chronos.App\Chronos.App.csproj&quot; $(ChronosPublishArgs)" />
+
+    <!-- Native symbol files of SkiaSharp and HarfBuzz (about 100 MB). Deleted here so the staging directory is the single list of what ships. -->
+    <ItemGroup>
+      <ChronosNativeSymbols Include="$(ChronosStageDir)\lib*.pdb" />
+    </ItemGroup>
+    <Delete Files="@(ChronosNativeSymbols)" />
+
+    <!-- Fail the build if a required file is missing, rather than ship a broken package. -->
+    <Error Condition="!Exists('$(ChronosStageDir)\Chronos.Service.exe')" Text="Chronos.Service.exe was not published into $(ChronosStageDir)." />
+    <Error Condition="!Exists('$(ChronosStageDir)\chronos.exe')" Text="chronos.exe was not published into $(ChronosStageDir)." />
+    <Error Condition="!Exists('$(ChronosStageDir)\Chronos.App.exe')" Text="Chronos.App.exe was not published into $(ChronosStageDir)." />
+    <Error Condition="!Exists('$(ChronosStageDir)\System.Diagnostics.EventLog.Messages.dll')" Text="The event log message resources were not published into $(ChronosStageDir). Without them Event Viewer cannot render a Chronos entry." />
+    <Error Condition="!Exists('$(ChronosStageDir)\hostfxr.dll') Or !Exists('$(ChronosStageDir)\coreclr.dll')" Text="The .NET runtime is not in $(ChronosStageDir): the package would need one installed on the machine." />
+    <Error Condition="!Exists('$(ChronosStageDir)\libSkiaSharp.dll')" Text="The interface's drawing library is not in $(ChronosStageDir): Chronos.App would install and fail to open a window." />
+  </Target>
+
+</Project>

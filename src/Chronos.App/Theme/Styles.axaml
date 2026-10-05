@@ -1,0 +1,277 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="using:Chronos.App.Controls">
+  <Style Selector="Window">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Background}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+  </Style>
+  <Style Selector="UserControl">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Background}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+  </Style>
+
+  <Style Selector="TextBlock.h1">
+    <Setter Property="FontFamily" Value="{DynamicResource Chronos.HeadingFont}" />
+    <Setter Property="FontSize" Value="22" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Heading}" />
+    <Setter Property="LetterSpacing" Value="1.5" />
+  </Style>
+  <Style Selector="TextBlock.logo">
+    <Setter Property="FontFamily" Value="{DynamicResource Chronos.LogoFont}" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="LetterSpacing" Value="3" />
+  </Style>
+  <Style Selector="TextBlock.timer">
+    <Setter Property="FontFamily" Value="{DynamicResource Chronos.HeadingFont}" />
+    <Setter Property="FontSize" Value="44" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Heading}" />
+  </Style>
+  <Style Selector="TextBlock.muted">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Muted}" />
+  </Style>
+
+  <Style Selector="Border.card">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Padding" Value="16" />
+  </Style>
+
+  <Style Selector="Button.primary">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Padding" Value="18,8" />
+    <Setter Property="CornerRadius" Value="4" />
+  </Style>
+  <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Selected}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+  </Style>
+
+  <!-- A button that reads as a link: the accent, underlined under the pointer. -->
+  <Style Selector="Button.link">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+  <Style Selector="Button.link:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Selected}" />
+    <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+  </Style>
+
+  <!-- Side panel entry: the selected one is lifted and carries a gold bar on the left. -->
+  <Style Selector="ListBox.nav">
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="ListBoxItem.nav, ListBox.nav ListBoxItem">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="3,0,0,0" />
+    <Setter Property="Padding" Value="14,10" />
+  </Style>
+  <Style Selector="ListBoxItem.nav:selected /template/ ContentPresenter#PART_ContentPresenter, ListBox.nav ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Selected}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+
+  <!-- Chips: buttons with the class, and the items of a ListBox.chips laid out in a WrapPanel. -->
+  <Style Selector="ListBox.chips">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <WrapPanel />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ToggleButton.chip, Button.chip">
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Border}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="Margin" Value="0,0,8,8" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+  </Style>
+  <!-- Fluent's grey button states, replaced the same way as the list chips below. -->
+  <Style Selector="ToggleButton.chip:pointerover /template/ ContentPresenter#PART_ContentPresenter, Button.chip:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+  <Style Selector="ToggleButton.chip:pressed /template/ ContentPresenter#PART_ContentPresenter, Button.chip:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+  <Style Selector="ListBox.chips ListBoxItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Border}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="Margin" Value="0,0,8,8" />
+  </Style>
+  <!-- Fluent's own hover and selection overlays are replaced, not layered under ours. -->
+  <Style Selector="ListBox.chips ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+  <Style Selector="ListBox.chips ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+  <Style Selector="ToggleButton.chip:checked /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+
+  <!-- The match kinds of the "Add application" dialog: two cards, the chosen one framed in gold. -->
+  <!-- Side by side, so the running list above keeps room for half a dozen rows. -->
+  <Style Selector="ListBox.kinds">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <UniformGrid Columns="2" />
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ListBox.kinds ListBoxItem">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Border}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Padding" Value="10,6" />
+    <Setter Property="Margin" Value="0,0,6,0" />
+  </Style>
+  <Style Selector="ListBox.kinds ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+  <Style Selector="ListBox.kinds ListBoxItem:disabled">
+    <Setter Property="Opacity" Value="0.45" />
+  </Style>
+
+  <!-- The dialog's tabs at the size of the rest of its text, not Fluent's headline size. -->
+  <Style Selector="TabControl.tabs TabItem">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="MinHeight" Value="32" />
+    <Setter Property="Padding" Value="10,0" />
+  </Style>
+
+  <!-- The running list of the same dialog: compact rows, the picked one on the accent with its path readable. -->
+  <Style Selector="ListBox.running">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+  </Style>
+  <Style Selector="ListBox.running ListBoxItem">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+    <Setter Property="Padding" Value="10,2" />
+  </Style>
+  <Style Selector="ListBox.running ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Background}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+  </Style>
+  <Style Selector="ListBox.running ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+  </Style>
+  <Style Selector="ListBox.running ListBoxItem:selected TextBlock.muted">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.OnAccent}" />
+  </Style>
+
+  <!-- The padlock. The geometry is a setter: text between tags is for words only. -->
+  <Style Selector="PathIcon.lock">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Muted}" />
+    <Setter Property="Width" Value="14" />
+    <Setter Property="Height" Value="14" />
+    <Setter Property="Data" Value="M12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10A2,2 0 0,1 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+  </Style>
+
+  <!-- The sign of an unavailable service; a setter for the same reason as the padlock. -->
+  <Style Selector="PathIcon.warning">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Error}" />
+    <Setter Property="Width" Value="40" />
+    <Setter Property="Height" Value="40" />
+    <Setter Property="Data" Value="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" />
+  </Style>
+
+  <!-- The cross of a removal; a setter for the same reason as the padlock. -->
+  <Style Selector="PathIcon.cross">
+    <Setter Property="Width" Value="12" />
+    <Setter Property="Height" Value="12" />
+    <Setter Property="Data" Value="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12Z" />
+  </Style>
+
+  <!-- The square with the first letter of a rule's name. -->
+  <Style Selector="Border.letter">
+    <Setter Property="Width" Value="24" />
+    <Setter Property="Height" Value="24" />
+    <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+  </Style>
+  <Style Selector="Border.letter > TextBlock">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Accent}" />
+  </Style>
+
+  <!-- A removal is a quiet cross until it is pointed at or reached with the keyboard. -->
+  <Style Selector="Button.remove">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="6" />
+  </Style>
+  <Style Selector="Button.remove:pointerover /template/ ContentPresenter#PART_ContentPresenter, Button.remove:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource Chronos.Surface}" />
+  </Style>
+  <Style Selector="Button.remove PathIcon.cross">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Muted}" />
+  </Style>
+  <Style Selector="Button.remove:pointerover PathIcon.cross, Button.remove:focus-visible PathIcon.cross">
+    <Setter Property="Foreground" Value="{DynamicResource Chronos.Text}" />
+  </Style>
+
+  <!-- A removal that is off stays in the layout, under the padlock drawn in its place. -->
+  <Style Selector="Button.remove:disabled">
+    <Setter Property="Opacity" Value="0" />
+  </Style>
+
+  <!-- The protection summary in the side panel: a button that looks like a line of text. -->
+  <Style Selector="Button.summary">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="8,6" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+  </Style>
+
+  <!-- State dots: working, not working, nothing reported. -->
+  <Style Selector="Ellipse.ok">
+    <Setter Property="Fill" Value="{DynamicResource Chronos.Ok}" />
+  </Style>
+  <Style Selector="Ellipse.warn">
+    <Setter Property="Fill" Value="{DynamicResource Chronos.Warn}" />
+  </Style>
+  <Style Selector="Ellipse.unknown">
+    <Setter Property="Fill" Value="{DynamicResource Chronos.Muted}" />
+  </Style>
+
+  <Style Selector="c|Hourglass">
+    <Setter Property="Sand" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Glass" Value="{DynamicResource Chronos.Border}" />
+    <Setter Property="Frame" Value="{DynamicResource Chronos.Accent}" />
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Progress" Duration="0:0:1" />
+      </Transitions>
+    </Setter>
+  </Style>
+</Styles>

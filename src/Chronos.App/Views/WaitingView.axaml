@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+             xmlns:c="using:Chronos.App.Controls"
+             x:Class="Chronos.App.Views.WaitingView"
+             x:DataType="vm:WaitingViewModel">
+
+  <!-- How long is left, and a plain way to change your mind. -->
+  <StackPanel Margin="24" Spacing="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <c:Hourglass Width="56" Height="96" HorizontalAlignment="Center" Progress="{Binding Progress}" />
+    <TextBlock Classes="h1" HorizontalAlignment="Center" Text="{Binding Text.UnlockHeading}" TextWrapping="Wrap" />
+    <TextBlock Classes="timer" HorizontalAlignment="Center" Text="{Binding RemainingDigits}" AutomationProperties.Name="{Binding RemainingText}" />
+    <Button Content="{Binding Text.CancelUnlock}"
+            Command="{Binding CancelCommand}"
+            HorizontalAlignment="Center" />
+  </StackPanel>
+</UserControl>

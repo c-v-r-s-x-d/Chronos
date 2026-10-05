@@ -1,0 +1,14 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea/
+
+# netsh wfp show state writes this into the current directory; it is a diagnostic dump, not a
+# source file. The briefs say to run that command from a scratch directory so the dump never
+# reaches the tree at all - this line is what catches the run that forgets.
+wfpstate.xml
+
+# Built release packages and their checksums; the source of a release is its tag.
+/release/

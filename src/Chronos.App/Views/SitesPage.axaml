@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+             xmlns:app="clr-namespace:Chronos.App"
+             x:Class="Chronos.App.Views.SitesPage"
+             x:DataType="vm:SitesSection">
+  <!-- The site list. Remove is shown but turned off during a session, with a lock and the reason: a hidden button looks broken. -->
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="32,28" Spacing="16">
+      <TextBlock Classes="h1" Text="{Binding Rules.Text.SitesHeading}" TextWrapping="Wrap" />
+
+      <DockPanel>
+        <Button DockPanel.Dock="Right"
+                Classes="primary"
+                Margin="8,0,0,0"
+                Content="{Binding Rules.Text.AddRule, StringFormat='+ {0}'}"
+                Command="{Binding Rules.AddSiteCommand}" />
+        <TextBox Text="{Binding Rules.NewSiteDomain}"
+                 PlaceholderText="{Binding Rules.Text.NewSitePlaceholder}">
+          <TextBox.KeyBindings>
+            <KeyBinding Gesture="Enter" Command="{Binding Rules.AddSiteCommand}" />
+          </TextBox.KeyBindings>
+        </TextBox>
+      </DockPanel>
+
+      <!-- A preset adds only what the list lacks; it works during a session as well. -->
+      <ItemsControl ItemsSource="{Binding Rules.Presets}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="app:PresetLine">
+            <Button Classes="chip"
+                    Content="{Binding Name, StringFormat='+ {0}'}"
+                    Command="{Binding $parent[ItemsControl].((vm:SitesSection)DataContext).Rules.ApplyPresetCommand}"
+                    CommandParameter="{Binding Preset}" />
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+      <!-- What the service said about the last command, or what a preset did. -->
+      <Border Classes="card" IsVisible="{Binding Rules.HasNotice}">
+        <TextBlock Text="{Binding Rules.Notice}" TextWrapping="Wrap" />
+      </Border>
+
+      <TextBox Text="{Binding Rules.SiteFilter}"
+               PlaceholderText="{Binding Rules.Text.SearchPlaceholder}"
+               IsVisible="{Binding Rules.ShowsSiteSearch}" />
+
+      <TextBlock Classes="muted"
+                 Text="{Binding Rules.Text.ListEmpty}"
+                 TextWrapping="Wrap"
+                 IsVisible="{Binding !Rules.Sites.Count}" />
+      <ItemsControl ItemsSource="{Binding Rules.SiteLines}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:SiteLine">
+            <DockPanel Margin="0,2">
+              <Panel DockPanel.Dock="Right" Margin="8,0,0,0">
+                <Button Classes="remove"
+                        Command="{Binding $parent[ItemsControl].((vm:SitesSection)DataContext).Rules.RemoveSiteCommand}"
+                        CommandParameter="{Binding Rule}"
+                        IsEnabled="{Binding $parent[ItemsControl].((vm:SitesSection)DataContext).Rules.CanRemoveRules}"
+                        ToolTip.Tip="{Binding $parent[ItemsControl].((vm:SitesSection)DataContext).Rules.Text.RemoveRule}"
+                        AutomationProperties.Name="{Binding RemoveName}">
+                  <PathIcon Classes="cross" />
+                </Button>
+                <!-- A Border carries the tooltip: the icon alone has no area to hover over. -->
+                <Border Background="Transparent"
+                        IsVisible="{Binding !$parent[ItemsControl].((vm:SitesSection)DataContext).Rules.CanRemoveRules}"
+                        ToolTip.Tip="{Binding $parent[ItemsControl].((vm:SitesSection)DataContext).Rules.Text.RemovalUnavailableShort}">
+                  <PathIcon Classes="lock" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Border>
+              </Panel>
+              <Border DockPanel.Dock="Left"
+                      Classes="letter"
+                      Margin="0,0,10,0">
+                <TextBlock Text="{Binding Letter}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+              <TextBlock Text="{Binding Rule.Domain}"
+                         VerticalAlignment="Center"
+                         TextTrimming="CharacterEllipsis" />
+            </DockPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+      <TextBlock Classes="muted"
+                 Text="{Binding Rules.RemovalUnavailable}"
+                 TextWrapping="Wrap"
+                 IsVisible="{Binding !Rules.CanRemoveRules}" />
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  The installer lays files down and asks the product to register itself. The service parameters,
+  recovery task, event log source and data directory permissions are defined once, in Chronos.Cli.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+
+  <!-- Language is stated (English): without it the summary template reads "x64;0" and the package has no declared language. -->
+  <Package
+    Name="Chronos"
+    Manufacturer="Chronos"
+    Version="$(var.ProductVersion)"
+    UpgradeCode="3BCA2F78-521A-4C6B-9236-3E1601202411"
+    Scope="perMachine"
+    Compressed="yes"
+    Language="1033"
+    Codepage="1252">
+
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of Chronos is already installed on this machine." />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- The icon in Settings > Apps and in Programs and Features. -->
+    <Icon Id="ChronosIcon" SourceFile="$(sys.SOURCEFILEDIR)..\..\assets\chronos.ico" />
+    <Property Id="ARPPRODUCTICON" Value="ChronosIcon" />
+
+    <!-- Turns a missing-rights failure into a clear message instead of a permissions error mid-install. -->
+    <Launch
+      Condition="Privileged"
+      Message="Chronos installs a Windows service and must be run with administrator rights." />
+
+    <!--
+      Unset keeps configuration and logs on uninstall; `msiexec /x Chronos.msi REMOVEDATA=1` passes
+      the purge switch to the product. Secure so the value survives the hand-off to the elevated service
+      that runs the deferred actions.
+    -->
+    <Property Id="REMOVEDATA" Secure="yes" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="Chronos" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder" />
+    <StandardDirectory Id="DesktopFolder" />
+
+    <Feature Id="Main" Title="Chronos" Level="1">
+      <ComponentGroupRef Id="ProductFiles" />
+      <ComponentRef Id="StartMenuShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="UserAutostart" />
+    </Feature>
+
+    <!--
+      The autostart entry, owned by the package so removal takes it off. The deferred actions run as
+      LocalSystem, where HKCU is HKU\S-1-5-18, so `chronos uninstall` cannot reach the user's Run
+      key. A per-user component is written into the installing user's hive and removed by Windows;
+      a repair from another account may write it into that account's hive instead.
+      Chronos.App.Startup.Autostart.Ensure writes only when no entry exists, so the two coexist.
+
+      Quoted, because a Run entry is a command line: an unquoted path with spaces is cut at the first space.
+    -->
+    <Component Id="UserAutostart" Directory="INSTALLFOLDER" Guid="AA77FFBA-7B9A-4E38-A39F-AA3B4E8E440D">
+      <RegistryValue
+        Root="HKCU"
+        Key="Software\Microsoft\Windows\CurrentVersion\Run"
+        Name="Chronos"
+        Type="string"
+        Value="&quot;[INSTALLFOLDER]Chronos.App.exe&quot;"
+        KeyPath="yes" />
+    </Component>
+
+    <!--
+      No prompt to close the interface. It is ended quietly before InstallValidate checks for files
+      in use (that check, Restart Manager's or the built-in one, is what asks), and an interactive
+      installation opens it again when it finishes. Nothing is lost: the session lives in the service.
+      Immediate, so it can run that early; Return="ignore", since there may be nothing to end.
+    -->
+    <Property Id="MSIRESTARTMANAGERCONTROL" Value="Disable" />
+    <SetProperty Id="WixQuietExecCmdLine" Value="&quot;[System64Folder]taskkill.exe&quot; /F /IM Chronos.App.exe" Before="CloseInterfaceEarly" Sequence="execute" />
+    <CustomAction Id="CloseInterfaceEarly" DllEntry="WixQuietExec" BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)" Execute="immediate" Return="ignore" />
+
+    <!--
+      The interface must be closed before RemoveFiles, which cannot delete a running executable.
+
+      TerminateProcess, not CloseMessage: the interface hides to the tray on WM_CLOSE and would keep
+      holding the file. Nothing is lost: the session lives in the service's state.json.
+    -->
+    <util:CloseApplication
+      Id="CloseChronosInterface"
+      Target="Chronos.App.exe"
+      Description="Chronos is running. It has to be closed before its files can be removed."
+      TerminateProcess="0"
+      RebootPrompt="no" />
+
+    <!-- Everything `dotnet publish` produced, by wildcard, so new dependencies are picked up. -->
+    <ComponentGroup Id="ProductFiles" Directory="INSTALLFOLDER">
+      <Files Include="$(var.PublishDir)\**" />
+    </ComponentGroup>
+
+    <Component Id="StartMenuShortcut" Directory="ProgramMenuFolder" Guid="FC4D55D8-9626-4251-B1FB-B1C4B2F2B80F">
+      <Shortcut
+        Id="ChronosShortcut"
+        Name="Chronos"
+        Description="Blocks the sites and applications you chose, for as long as you chose."
+        Target="[INSTALLFOLDER]Chronos.App.exe"
+        WorkingDirectory="INSTALLFOLDER" />
+
+      <!--
+        A shortcut is not a key path, so the component needs a registry key path, and it must be HKCU:
+        HKMU fails ICE57 and HKLM fails ICE38/ICE43 (the validators treat ProgramMenuFolder as a
+        user-profile directory). Windows therefore tracks this component per user, and a repair from
+        another account may restore the shortcut.
+      -->
+      <RegistryValue
+        Root="HKCU"
+        Key="Software\Chronos"
+        Name="StartMenuShortcut"
+        Type="integer"
+        Value="1"
+        KeyPath="yes" />
+    </Component>
+
+    <!-- Same key-path rule as the Start Menu shortcut: ICE treats the desktop as a per-user folder. -->
+    <Component Id="DesktopShortcut" Directory="DesktopFolder" Guid="5E0C6F3A-2B7D-4C1E-9A4F-8D2B6C1E7A90">
+      <Shortcut
+        Id="ChronosDesktopShortcut"
+        Name="Chronos"
+        Description="Blocks the sites and applications you chose, for as long as you chose."
+        Target="[INSTALLFOLDER]Chronos.App.exe"
+        WorkingDirectory="INSTALLFOLDER" />
+      <RegistryValue
+        Root="HKCU"
+        Key="Software\Chronos"
+        Name="DesktopShortcut"
+        Type="integer"
+        Value="1"
+        KeyPath="yes" />
+    </Component>
+
+    <!--
+      Opens the interface when an interactive installation finishes. Scheduled in the UI sequence,
+      which runs in the user's own msiexec process without administrator rights; from the execute
+      sequence the interface would start elevated. Silent installations (/qb, /qn) skip it.
+    -->
+    <SetProperty Id="WixShellExecTarget" Value="[INSTALLFOLDER]Chronos.App.exe" Before="LaunchChronos" Sequence="ui" />
+    <CustomAction Id="LaunchChronos" DllEntry="WixShellExec" BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)" Impersonate="yes" Return="ignore" />
+
+    <!--
+      A deferred custom action cannot read properties, so the executable path travels in the property
+      named after the action and the arguments are literal. Hence separate rows for "uninstall" and
+      "uninstall" and the purge form.
+
+      Impersonate="no": they register a service, write HKLM and create a scheduled task.
+    -->
+    <SetProperty
+      Id="ChronosRegister"
+      Value="[INSTALLFOLDER]chronos.exe"
+      Before="ChronosRegister"
+      Sequence="execute"
+      Condition="NOT Installed" />
+
+    <CustomAction
+      Id="ChronosRegister"
+      Property="ChronosRegister"
+      ExeCommand="install"
+      Execute="deferred"
+      Impersonate="no"
+      Return="check" />
+
+    <SetProperty
+      Id="ChronosUnregister"
+      Value="[INSTALLFOLDER]chronos.exe"
+      Before="ChronosUnregister"
+      Sequence="execute"
+      Condition="REMOVE=&quot;ALL&quot; AND NOT REMOVEDATA" />
+
+    <!--
+      Return="ignore": `chronos uninstall` continues past failed steps and returns 4, having
+      reported them. Checked, that would roll the uninstall back and restore files onto a machine whose
+      service and task are already gone.
+    -->
+    <CustomAction
+      Id="ChronosUnregister"
+      Property="ChronosUnregister"
+      ExeCommand="uninstall"
+      Execute="deferred"
+      Impersonate="no"
+      Return="ignore" />
+
+    <SetProperty
+      Id="ChronosUnregisterPurge"
+      Value="[INSTALLFOLDER]chronos.exe"
+      Before="ChronosUnregisterPurge"
+      Sequence="execute"
+      Condition="REMOVE=&quot;ALL&quot; AND REMOVEDATA" />
+
+    <CustomAction
+      Id="ChronosUnregisterPurge"
+      Property="ChronosUnregisterPurge"
+      ExeCommand="uninstall --purge"
+      Execute="deferred"
+      Impersonate="no"
+      Return="ignore" />
+
+    <InstallExecuteSequence>
+      <!--
+        Register after the files, since the action runs one of them. Unregister before RemoveFiles:
+        the event log source must go while the executable its message resources point at still exists.
+      -->
+      <!--
+        The close is moved from the extension's own slot (Before InstallFiles), which is too late on
+        removal: RemoveFiles runs first. It cannot go before InstallValidate: a deferred action may
+        only be scheduled between InstallInitialize and InstallFinalize (error 2762, exit 1603).
+
+        The action name includes the platform, as WiX names extension actions; 'override' makes this
+        row replace the extension's instead of colliding with it.
+      -->
+      <Custom
+        Action="override Wix4CloseApplications_$(sys.BUILDARCHSHORT)"
+        Before="RemoveFiles"
+        Condition="VersionNT &gt; 400" />
+
+      <Custom Action="CloseInterfaceEarly" Before="InstallValidate" />
+      <Custom Action="ChronosRegister" After="InstallFiles" Condition="NOT Installed" />
+      <Custom Action="ChronosUnregister" Before="RemoveFiles" Condition="REMOVE=&quot;ALL&quot; AND NOT REMOVEDATA" />
+      <Custom Action="ChronosUnregisterPurge" Before="RemoveFiles" Condition="REMOVE=&quot;ALL&quot; AND REMOVEDATA" />
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="LaunchChronos" After="ExecuteAction" Condition="NOT (REMOVE~=&quot;ALL&quot;)" />
+    </InstallUISequence>
+
+  </Package>
+
+</Wix>

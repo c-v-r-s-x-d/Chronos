@@ -1,0 +1,57 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- PaletteTests checks every readable pair. -->
+  <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Dark">
+      <Color x:Key="Chronos.BackgroundColor">#15161A</Color>
+      <Color x:Key="Chronos.SidebarColor">#101114</Color>
+      <Color x:Key="Chronos.SurfaceColor">#1C1B18</Color>
+      <Color x:Key="Chronos.DividerColor">#2A2720</Color>
+      <Color x:Key="Chronos.BorderColor">#3A352A</Color>
+      <Color x:Key="Chronos.TextColor">#ECE6D8</Color>
+      <Color x:Key="Chronos.HeadingColor">#E7D7B0</Color>
+      <Color x:Key="Chronos.MutedColor">#8F897C</Color>
+      <Color x:Key="Chronos.AccentColor">#C9A45C</Color>
+      <Color x:Key="Chronos.OnAccentColor">#1A150A</Color>
+      <Color x:Key="Chronos.SelectedColor">#E7C983</Color>
+      <Color x:Key="Chronos.OkColor">#8FBF7A</Color>
+      <Color x:Key="Chronos.WarnColor">#D9A441</Color>
+      <Color x:Key="Chronos.ErrorColor">#D0705A</Color>
+    </ResourceDictionary>
+    <ResourceDictionary x:Key="Light">
+      <Color x:Key="Chronos.BackgroundColor">#F6F3EC</Color>
+      <Color x:Key="Chronos.SidebarColor">#EDE8DC</Color>
+      <Color x:Key="Chronos.SurfaceColor">#FFFFFF</Color>
+      <Color x:Key="Chronos.DividerColor">#DDD4C0</Color>
+      <Color x:Key="Chronos.BorderColor">#CFC4AC</Color>
+      <Color x:Key="Chronos.TextColor">#2B2822</Color>
+      <Color x:Key="Chronos.HeadingColor">#3A3122</Color>
+      <Color x:Key="Chronos.MutedColor">#67615A</Color>
+      <Color x:Key="Chronos.AccentColor">#8A6A24</Color>
+      <Color x:Key="Chronos.OnAccentColor">#FFFFFF</Color>
+      <Color x:Key="Chronos.SelectedColor">#6E5316</Color>
+      <Color x:Key="Chronos.OkColor">#377033</Color>
+      <Color x:Key="Chronos.WarnColor">#8F600C</Color>
+      <Color x:Key="Chronos.ErrorColor">#A8432F</Color>
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+
+  <!-- Brushes follow the variant because their colours are looked up dynamically. -->
+  <SolidColorBrush x:Key="Chronos.Background" Color="{DynamicResource Chronos.BackgroundColor}" />
+  <SolidColorBrush x:Key="Chronos.Sidebar" Color="{DynamicResource Chronos.SidebarColor}" />
+  <SolidColorBrush x:Key="Chronos.Surface" Color="{DynamicResource Chronos.SurfaceColor}" />
+  <SolidColorBrush x:Key="Chronos.Divider" Color="{DynamicResource Chronos.DividerColor}" />
+  <SolidColorBrush x:Key="Chronos.Border" Color="{DynamicResource Chronos.BorderColor}" />
+  <SolidColorBrush x:Key="Chronos.Text" Color="{DynamicResource Chronos.TextColor}" />
+  <SolidColorBrush x:Key="Chronos.Heading" Color="{DynamicResource Chronos.HeadingColor}" />
+  <SolidColorBrush x:Key="Chronos.Muted" Color="{DynamicResource Chronos.MutedColor}" />
+  <SolidColorBrush x:Key="Chronos.Accent" Color="{DynamicResource Chronos.AccentColor}" />
+  <SolidColorBrush x:Key="Chronos.OnAccent" Color="{DynamicResource Chronos.OnAccentColor}" />
+  <SolidColorBrush x:Key="Chronos.Selected" Color="{DynamicResource Chronos.SelectedColor}" />
+  <SolidColorBrush x:Key="Chronos.Ok" Color="{DynamicResource Chronos.OkColor}" />
+  <SolidColorBrush x:Key="Chronos.Warn" Color="{DynamicResource Chronos.WarnColor}" />
+  <SolidColorBrush x:Key="Chronos.Error" Color="{DynamicResource Chronos.ErrorColor}" />
+
+  <FontFamily x:Key="Chronos.HeadingFont">avares://Chronos.App/Assets/Fonts#Forum</FontFamily>
+  <FontFamily x:Key="Chronos.LogoFont">avares://Chronos.App/Assets/Fonts#Cinzel</FontFamily>
+</ResourceDictionary>

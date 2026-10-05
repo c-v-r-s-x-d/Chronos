@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Chronos.App/Chronos.App.csproj" />
+    <Project Path="src/Chronos.Cli/Chronos.Cli.csproj" />
+    <Project Path="src/Chronos.Core/Chronos.Core.csproj" />
+    <Project Path="src/Chronos.Ipc/Chronos.Ipc.csproj" />
+    <Project Path="src/Chronos.Service/Chronos.Service.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Chronos.App.Tests/Chronos.App.Tests.csproj" />
+    <Project Path="tests/Chronos.Core.Tests/Chronos.Core.Tests.csproj" />
+    <Project Path="tests/Chronos.Service.Tests/Chronos.Service.Tests.csproj" />
+  </Folder>
+</Solution>

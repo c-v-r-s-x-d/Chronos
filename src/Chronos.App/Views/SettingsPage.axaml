@@ -1,0 +1,81 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Chronos.App.ViewModels"
+             xmlns:loc="clr-namespace:Chronos.App.Localization"
+             x:Class="Chronos.App.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel">
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="32,28" Spacing="16">
+      <TextBlock Classes="h1" Text="{Binding Text.SectionSettings}" TextWrapping="Wrap" />
+
+      <!-- Only layers the service has reported on: an unreported layer is absent from the status, and unknown differs from working. -->
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="{Binding ProtectionHeading}" FontWeight="SemiBold" TextWrapping="Wrap" />
+          <TextBlock Classes="muted"
+                     Text="{Binding Text.LayersUnknown}"
+                     TextWrapping="Wrap"
+                     IsVisible="{Binding !AnyLayerReported}" />
+          <ItemsControl ItemsSource="{Binding Layers}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="loc:LayerLine">
+                <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" Margin="0,4">
+                  <Ellipse Grid.Column="0"
+                           Width="8"
+                           Height="8"
+                           Margin="0,0,10,0"
+                           VerticalAlignment="Center"
+                           Classes.ok="{Binding IsAvailable}"
+                           Classes.warn="{Binding !IsAvailable}" />
+                  <TextBlock Grid.Column="1" Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                  <TextBlock Grid.Column="2" Classes="muted" Margin="12,0,0,0" Text="{Binding State}" />
+                  <!-- The reason, in this interface's words or as the identifier the service sent. -->
+                  <TextBlock Grid.Row="1"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             Classes="muted"
+                             Text="{Binding Reason}"
+                             TextWrapping="Wrap"
+                             IsVisible="{Binding !IsAvailable}" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+          <!-- While the dns layer is not working no notice about a site can arrive. Said here. -->
+          <TextBlock Text="{Binding Text.SiteNoticesUnavailable}"
+                     Classes="muted"
+                     TextWrapping="Wrap"
+                     IsVisible="{Binding !SiteNoticesAvailable}" />
+        </StackPanel>
+      </Border>
+
+      <!--
+        The choice applies as it is made and is kept by the service. "Follow the system" is on the
+        list because it is what the configuration holds until changed, and it gives a way back.
+      -->
+      <Border Classes="card">
+        <StackPanel Spacing="12">
+          <TextBlock Text="{Binding Text.GeneralHeading}" FontWeight="SemiBold" TextWrapping="Wrap" />
+          <DockPanel>
+            <ComboBox DockPanel.Dock="Right"
+                      ItemsSource="{Binding Languages}"
+                      SelectedIndex="{Binding SelectedLanguage, Mode=TwoWay}"
+                      Width="240">
+              <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="loc:LanguageLine">
+                  <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Text="{Binding Text.LanguageHeading}" VerticalAlignment="Center" TextWrapping="Wrap" />
+          </DockPanel>
+          <DockPanel>
+            <TextBlock DockPanel.Dock="Right" Classes="muted" Text="{Binding Version}" />
+            <TextBlock Text="{Binding Text.VersionLabel}" TextWrapping="Wrap" />
+          </DockPanel>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    The neutral resource: English, and the fallback for every language with no satellite. Keys are
+    read through the generated Strings class, so a typo is a compile error.
+
+    The three plural forms of a noun are three keys. English only selects One and Many but carries
+    Few too, so the key set is the same in every language.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActiveHeading" xml:space="preserve">
+    <value>A session is running.</value>
+  </data>
+  <data name="AddApp" xml:space="preserve">
+    <value>+ Add</value>
+    <comment>Opens the dialog from the apps page, and confirms inside it.</comment>
+  </data>
+  <data name="AddAppTitle" xml:space="preserve">
+    <value>Add an application</value>
+  </data>
+  <data name="AddRule" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AppsHeading" xml:space="preserve">
+    <value>Blocked applications</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Chronos</value>
+    <comment>The product name. Same word in every language; a key all the same, so the markup holds no literal.</comment>
+  </data>
+  <data name="BlockDismiss" xml:space="preserve">
+    <value>All right</value>
+    <comment>The only control on the block screen. It closes the window and nothing else.</comment>
+  </data>
+  <data name="BlockedAppFormat" xml:space="preserve">
+    <value>{0} is blocked for this session, so Chronos closed it.</value>
+    <comment>Says what happened and why, in that order. {0} is the executable's name from the user's own list, not translated.</comment>
+  </data>
+  <data name="BlockedSiteFormat" xml:space="preserve">
+    <value>{0} is blocked for this session, so Chronos kept it from opening.</value>
+    <comment>The same window as a closed application. {0} is the domain the attempt asked for, not translated.</comment>
+  </data>
+  <data name="CancelUnlock" xml:space="preserve">
+    <value>Keep the session</value>
+    <comment>The way to change your mind, worded plainly.</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChooseExecutable" xml:space="preserve">
+    <value>Pick a program...</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Choose a file...</value>
+  </data>
+  <data name="ChooseShortcut" xml:space="preserve">
+    <value>Pick a shortcut...</value>
+  </data>
+  <data name="CoolDownNoticeFormat" xml:space="preserve">
+    <value>Lifting the block takes effect {0} after it is asked for.</value>
+  </data>
+  <data name="ExecutableFiles" xml:space="preserve">
+    <value>Programs</value>
+  </data>
+  <data name="ExitCancel" xml:space="preserve">
+    <value>Keep running</value>
+  </data>
+  <data name="ExitConfirm" xml:space="preserve">
+    <value>Quit anyway</value>
+  </data>
+  <data name="ExitWarning" xml:space="preserve">
+    <value>Quitting does not lift the block: the service goes on enforcing the session to its end. What stops is what you see - no block screens and no notices - until Chronos is started again.</value>
+    <comment>Both halves said plainly: what quitting does not change, and the one thing it does cost.</comment>
+  </data>
+  <data name="ExitWarningHeading" xml:space="preserve">
+    <value>Quit Chronos?</value>
+  </data>
+  <data name="ExtendSession" xml:space="preserve">
+    <value>Extend</value>
+  </data>
+  <data name="GeneralHeading" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="HourFew" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="HourMany" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="HourOne" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="HourOneAccusative" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="LanguageHeading" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LayerApps" xml:space="preserve">
+    <value>Closing apps</value>
+  </data>
+  <data name="LayerAvailable" xml:space="preserve">
+    <value>works</value>
+  </data>
+  <data name="LayerDns" xml:space="preserve">
+    <value>DNS resolver</value>
+  </data>
+  <data name="LayerHosts" xml:space="preserve">
+    <value>Hosts file</value>
+  </data>
+  <data name="LayerReasonAppsNoEventSource" xml:space="preserve">
+    <value>Windows gave Chronos no way to hear about applications starting.</value>
+  </data>
+  <data name="LayerReasonDnsBackupOnePlace" xml:space="preserve">
+    <value>The copy of the network settings was saved in one place instead of two.</value>
+  </data>
+  <data name="LayerReasonDnsLoopbackBlocked" xml:space="preserve">
+    <value>DNS queries to 127.0.0.1 do not reach the Chronos resolver. A VPN is probably filtering them.</value>
+  </data>
+  <data name="LayerReasonDnsNoUpstream" xml:space="preserve">
+    <value>No network connection has a DNS server of its own to keep as a fallback.</value>
+  </data>
+  <data name="LayerReasonDnsPortBusy" xml:space="preserve">
+    <value>Another program is using port 53, which the Chronos resolver needs.</value>
+  </data>
+  <data name="LayerReasonDnsSettingsRefused" xml:space="preserve">
+    <value>Windows did not accept the new DNS settings on a network connection.</value>
+  </data>
+  <data name="LayerReasonHostsDirectoryMissing" xml:space="preserve">
+    <value>The folder that holds the hosts file is not there.</value>
+  </data>
+  <data name="LayerReasonHostsNotWritable" xml:space="preserve">
+    <value>The hosts file cannot be opened for writing; something else is holding it.</value>
+  </data>
+  <data name="LayerReasonUnavailable" xml:space="preserve">
+    <value>The layer reported itself unavailable without saying why.</value>
+    <comment>The reason the service makes up for any layer that gives none: "&lt;layer&gt;.unavailable".</comment>
+  </data>
+  <data name="LayerReasonUnhandled" xml:space="preserve">
+    <value>The layer stopped with an error the service did not recognise.</value>
+    <comment>The reason the service makes up for any layer: "&lt;layer&gt;.unhandled".</comment>
+  </data>
+  <data name="LayerReasonWfpDisabledByUser" xml:space="preserve">
+    <value>Turned off in the settings.</value>
+  </data>
+  <data name="LayerReasonWfpEngineUnavailable" xml:space="preserve">
+    <value>Windows did not let Chronos into its filtering engine.</value>
+    <comment>The platform's own message is deliberately not shown: it arrives in whatever language the machine was installed in.</comment>
+  </data>
+  <data name="LayersUnknown" xml:space="preserve">
+    <value>No layer has reported yet, so what works on this machine is not known.</value>
+    <comment>Unknown is not the same answer as working, and this is the difference said out loud.</comment>
+  </data>
+  <data name="LayerReady" xml:space="preserve">
+    <value>available</value>
+  </data>
+  <data name="LayerNotWorking" xml:space="preserve">
+    <value>not working</value>
+  </data>
+  <data name="LayerUnavailable" xml:space="preserve">
+    <value>not available</value>
+  </data>
+  <data name="LayerWfp" xml:space="preserve">
+    <value>Firewall</value>
+  </data>
+  <data name="ListEmpty" xml:space="preserve">
+    <value>Nothing here yet.</value>
+  </data>
+  <data name="MatchFileName" xml:space="preserve">
+    <value>Any program with this name</value>
+  </data>
+  <data name="MatchFileNameExplained" xml:space="preserve">
+    <value>Wherever it is installed. The rule survives an update or a reinstall that puts the program in another folder - and it also catches a different program that happens to be called the same thing.</value>
+    <comment>Matching by file name.</comment>
+  </data>
+  <data name="MatchFullPath" xml:space="preserve">
+    <value>Only this exact file</value>
+  </data>
+  <data name="MatchFullPathExplained" xml:space="preserve">
+    <value>This file and nothing else. The rule stops matching the moment the program is moved, updated into a new folder or installed again somewhere else.</value>
+    <comment>Matching by full path.</comment>
+  </data>
+  <data name="MatchKindHeading" xml:space="preserve">
+    <value>How the rule matches</value>
+    <comment>The choice is offered with an explanation, because the difference is invisible and the consequences are not.</comment>
+  </data>
+  <data name="MinuteFew" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="MinuteMany" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="MinuteOne" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="MinuteOneAccusative" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="NewAppPlaceholder" xml:space="preserve">
+    <value>an application, such as steam.exe</value>
+  </data>
+  <data name="NewSitePlaceholder" xml:space="preserve">
+    <value>a site, such as reddit.com</value>
+  </data>
+  <data name="NoticeCommandUnknown" xml:space="preserve">
+    <value>The service does not know this command. It may be older than this window.</value>
+  </data>
+  <data name="NoticeConfigCoolDownAppliesNextSession" xml:space="preserve">
+    <value>The session already running keeps the delay it started with; the new one applies from the next session.</value>
+  </data>
+  <data name="NoticeConfigCoolDownClamped" xml:space="preserve">
+    <value>The delay before the block lifts was set to {0} min, the nearest allowed value.</value>
+  </data>
+  <data name="NoticeConfigLanguageBlank" xml:space="preserve">
+    <value>Choose a language.</value>
+  </data>
+  <data name="NoticeConfigSessionDurationClamped" xml:space="preserve">
+    <value>The default session length was set to {0} min, the nearest allowed value.</value>
+  </data>
+  <data name="NoticeConfigSettingsMissing" xml:space="preserve">
+    <value>The request to change the settings carried no settings.</value>
+  </data>
+  <data name="NoticeRequestEmpty" xml:space="preserve">
+    <value>The request to the service was empty.</value>
+  </data>
+  <data name="NoticeRequestInvalidJson" xml:space="preserve">
+    <value>The service could not read the request.</value>
+  </data>
+  <data name="NoticeRulesAddWrongState" xml:space="preserve">
+    <value>Rules can be added to a session only while it is running.</value>
+  </data>
+  <data name="NoticeRulesAppKindUnknown" xml:space="preserve">
+    <value>The service does not know this kind of application rule.</value>
+  </data>
+  <data name="NoticeRulesAppMissing" xml:space="preserve">
+    <value>The request named no application.</value>
+  </data>
+  <data name="NoticeRulesAppNotFound" xml:space="preserve">
+    <value>There is no rule for that application in the list.</value>
+  </data>
+  <data name="NoticeRulesAppProtected" xml:space="preserve">
+    <value>This application is protected and cannot be blocked.</value>
+  </data>
+  <data name="NoticeRulesAppProtectedSystemDirectory" xml:space="preserve">
+    <value>This application lives in a Windows system folder, so it cannot be blocked.</value>
+  </data>
+  <data name="NoticeRulesAppProtectedSystemFile" xml:space="preserve">
+    <value>Windows or Chronos itself needs this application, so it cannot be blocked.</value>
+  </data>
+  <data name="NoticeRulesAppValueBlank" xml:space="preserve">
+    <value>Choose an application.</value>
+  </data>
+  <data name="NoticeRulesFrozen" xml:space="preserve">
+    <value>The session has just ended and the block is still being lifted. Try again in a moment.</value>
+  </data>
+  <data name="NoticeRulesRemovalWaitsForNextSession" xml:space="preserve">
+    <value>The rule was removed from the list. The session already running keeps it until it ends.</value>
+  </data>
+  <data name="NoticeRulesSiteDomainBlank" xml:space="preserve">
+    <value>Enter a site address.</value>
+  </data>
+  <data name="NoticeRulesSiteMissing" xml:space="preserve">
+    <value>The request named no site.</value>
+  </data>
+  <data name="NoticeRulesSiteNotFound" xml:space="preserve">
+    <value>There is no rule for that site in the list.</value>
+  </data>
+  <data name="NoticeSessionCannotShorten" xml:space="preserve">
+    <value>A session can only be extended, never shortened.</value>
+  </data>
+  <data name="NoticeSessionCoolDownClamped" xml:space="preserve">
+    <value>The delay before the block lifts was set to {0} min, the nearest allowed value.</value>
+  </data>
+  <data name="NoticeSessionDurationClamped" xml:space="preserve">
+    <value>The session length was set to {0} min, the nearest allowed value.</value>
+  </data>
+  <data name="NoticeSessionEmptyBlockList" xml:space="preserve">
+    <value>There is nothing to block. Add a site or an application first.</value>
+  </data>
+  <data name="NoticeSessionEndClamped" xml:space="preserve">
+    <value>A session cannot last longer than {0} min, so it now ends at that limit.</value>
+  </data>
+  <data name="NoticeSessionExtendNeedsMinutes" xml:space="preserve">
+    <value>A session can be extended only by a positive number of minutes.</value>
+  </data>
+  <data name="NoticeSessionExtendWrongState" xml:space="preserve">
+    <value>There is no running session to extend.</value>
+  </data>
+  <data name="NoticeSessionNoneToExtend" xml:space="preserve">
+    <value>There is no session to extend.</value>
+  </data>
+  <data name="NoticeSessionProtectedAppSkipped" xml:space="preserve">
+    <value>{0} is protected and was left out of the session.</value>
+  </data>
+  <data name="NoticeSessionStartWrongState" xml:space="preserve">
+    <value>A session is already running, or the block of the last one is still being lifted.</value>
+  </data>
+  <data name="NoticeUnlockCancelWrongState" xml:space="preserve">
+    <value>There is nothing to cancel: no request to lift the block is pending.</value>
+  </data>
+  <data name="NoticeUnlockRequestWrongState" xml:space="preserve">
+    <value>Lifting the block can be requested only during a session, and only if it has not been requested already.</value>
+  </data>
+  <data name="PresetGames" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="PresetNews" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="PresetOutcomeFormat" xml:space="preserve">
+    <value>Added: {0}. Already there: {1}.</value>
+  </data>
+  <data name="PresetSocial" xml:space="preserve">
+    <value>Social networks</value>
+  </data>
+  <data name="PresetVideo" xml:space="preserve">
+    <value>Video and streaming</value>
+  </data>
+  <data name="ProtectedAppFormat" xml:space="preserve">
+    <value>{0} cannot be blocked: Windows or Chronos itself needs it to keep running.</value>
+    <comment>The interface's own refusal, so it is worded here. The service's refusal arrives already written and is shown as it is.</comment>
+  </data>
+  <data name="BlockingMethodsHeading" xml:space="preserve">
+    <value>Blocking methods</value>
+  </data>
+  <data name="ProtectionHeading" xml:space="preserve">
+    <value>Protection</value>
+  </data>
+  <data name="ProtectionOff" xml:space="preserve">
+    <value>Protection off</value>
+  </data>
+  <data name="ProtectionOn" xml:space="preserve">
+    <value>Protection on</value>
+  </data>
+  <data name="ProtectionPartial" xml:space="preserve">
+    <value>Protection partly on</value>
+  </data>
+  <data name="ProtectionUnknown" xml:space="preserve">
+    <value>State unknown</value>
+  </data>
+  <data name="RemovalUnavailable" xml:space="preserve">
+    <value>Rules cannot be taken off the list while a session is running. A removal would only apply from the next one, and this session keeps the list it began with.</value>
+    <comment>Said next to the button rather than instead of it: a hidden button looks broken.</comment>
+  </data>
+  <data name="RemovalUnavailableShort" xml:space="preserve">
+    <value>Cannot be removed until the session ends</value>
+  </data>
+  <data name="RemoveRule" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RequestUnlock" xml:space="preserve">
+    <value>Ask to lift the block…</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SecondFew" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="SecondMany" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="SecondOne" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="SecondOneAccusative" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="SectionApps" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+  <data name="SectionSession" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="SectionSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SectionSites" xml:space="preserve">
+    <value>Sites</value>
+  </data>
+  <data name="ServiceAvailable" xml:space="preserve">
+    <value>Connected to the Chronos service.</value>
+  </data>
+  <data name="ServiceConnecting" xml:space="preserve">
+    <value>Looking for the Chronos service...</value>
+  </data>
+  <data name="ServiceUnavailableHeading" xml:space="preserve">
+    <value>The Chronos service is not available</value>
+  </data>
+  <data name="ServiceUnavailableMeaning" xml:space="preserve">
+    <value>A session that was running keeps blocking: the service holds the block on its own, and this window only shows it. While the service is away this window can neither show nor change anything.</value>
+  </data>
+  <data name="ServiceRecoverHint" xml:space="preserve">
+    <value>Check that the service is running. If it was removed or damaged, run "chronos recover" in a command prompt as administrator.</value>
+  </data>
+  <data name="ServiceRetryFormat" xml:space="preserve">
+    <value>Next attempt in {0}.</value>
+  </data>
+  <data name="ServiceRetryNow" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
+  <data name="SessionFinishing" xml:space="preserve">
+    <value>The session is finishing.</value>
+    <comment>The engine's Ended state, said in a word rather than in a screen of its own: it is the state of clearing up and lasts seconds.</comment>
+  </data>
+  <data name="SessionRemainingFormat" xml:space="preserve">
+    <value>{0} left.</value>
+  </data>
+  <data name="ShortcutFiles" xml:space="preserve">
+    <value>Shortcuts</value>
+  </data>
+  <data name="ShortcutNoTarget" xml:space="preserve">
+    <value>That shortcut does not point at a program. A shortcut to a folder or to one of Windows&apos; own items has no executable to block.</value>
+  </data>
+  <data name="ShortcutNotAShortcut" xml:space="preserve">
+    <value>That file is not a shortcut, so there is nothing to follow. Pick the shortcut itself, or the program&apos;s own file.</value>
+    <comment>A shortcut is followed to the program it starts; a file that is not one cannot be.</comment>
+  </data>
+  <data name="ShortcutPointsTo" xml:space="preserve">
+    <value>Leads to: {0}</value>
+    <comment>{0} is the path of the program the chosen shortcut starts.</comment>
+  </data>
+  <data name="ShortcutTargetMissing" xml:space="preserve">
+    <value>The program this shortcut points at is not on this machine any more. Install it again, or pick its file directly.</value>
+  </data>
+  <data name="ShorteningUnavailable" xml:space="preserve">
+    <value>A session can be made longer, never shorter. Asking for the block to be lifted is the way out, and it takes the wait it takes.</value>
+    <comment>The unavailability is explained where the extending is.</comment>
+  </data>
+  <data name="SiteNoticesUnavailable" xml:space="preserve">
+    <value>Chronos will not tell you when a blocked site is opened: only the DNS resolver sees the attempt, and it is not working or has not been checked yet. What can still block sites is listed above.</value>
+    <comment>Shown while the dns layer is unavailable or has not reported. Promising a notice that cannot arrive would make the block look broken.</comment>
+  </data>
+  <data name="SitesHeading" xml:space="preserve">
+    <value>Blocked sites</value>
+  </data>
+  <data name="StartSession" xml:space="preserve">
+    <value>Start session</value>
+  </data>
+  <data name="TabExecutable" xml:space="preserve">
+    <value>.exe file</value>
+  </data>
+  <data name="TabName" xml:space="preserve">
+    <value>By name</value>
+  </data>
+  <data name="TabRunning" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="TabShortcut" xml:space="preserve">
+    <value>Shortcut</value>
+  </data>
+  <data name="TrayActiveFormat" xml:space="preserve">
+    <value>a session is running, {0} left</value>
+    <comment>A sign that blocking is on, and how long is left. Short because the notification area truncates a tooltip past 127 characters without saying so.</comment>
+  </data>
+  <data name="TrayConnecting" xml:space="preserve">
+    <value>looking for the service</value>
+  </data>
+  <data name="TrayExit" xml:space="preserve">
+    <value>Quit Chronos</value>
+  </data>
+  <data name="TrayIdle" xml:space="preserve">
+    <value>no session is running</value>
+  </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Open Chronos</value>
+    <comment>The window hides to the tray, so there has to be a way back to it.</comment>
+  </data>
+  <data name="TrayUnknown" xml:space="preserve">
+    <value>the state of blocking is not known here</value>
+    <comment>The service has not said. Neither icon would be true, and a tooltip is too small to say what to check - the window does that.</comment>
+  </data>
+  <data name="UnlockRemainingFormat" xml:space="preserve">
+    <value>The block lifts in {0}.</value>
+    <comment>The whole of the waiting screen, with the cancel button: remaining time and a way to change your mind.</comment>
+  </data>
+  <data name="SiteOne" xml:space="preserve">
+    <value>site</value>
+  </data>
+  <data name="SiteFew" xml:space="preserve">
+    <value>sites</value>
+  </data>
+  <data name="SiteMany" xml:space="preserve">
+    <value>sites</value>
+  </data>
+  <data name="AppOne" xml:space="preserve">
+    <value>app</value>
+  </data>
+  <data name="AppFew" xml:space="preserve">
+    <value>apps</value>
+  </data>
+  <data name="AppMany" xml:space="preserve">
+    <value>apps</value>
+  </data>
+  <data name="SessionSummaryFormat" xml:space="preserve">
+    <value>Blocks {0} and {1} until {2}.</value>
+  </data>
+  <data name="NothingToBlock" xml:space="preserve">
+    <value>Nothing is on your lists yet, so a session would block nothing.</value>
+  </data>
+  <data name="CustomDuration" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="GoToSites" xml:space="preserve">
+    <value>Add sites</value>
+  </data>
+  <data name="GoToApps" xml:space="preserve">
+    <value>Add apps</value>
+  </data>
+  <data name="MinutesLabel" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="NewSessionHeading" xml:space="preserve">
+    <value>New session</value>
+  </data>
+  <data name="SessionSummaryOneFormat" xml:space="preserve">
+    <value>Blocks {0} until {1}.</value>
+  </data>
+  <data name="EndsAtFormat" xml:space="preserve">
+    <value>until {0}</value>
+  </data>
+  <data name="ExtendHeading" xml:space="preserve">
+    <value>Extend</value>
+  </data>
+  <data name="CustomExtend" xml:space="preserve">
+    <value>Custom…</value>
+  </data>
+  <data name="UnlockHeading" xml:space="preserve">
+    <value>Unlocks in</value>
+  </data>
+  <data name="RemainingCaption" xml:space="preserve">
+    <value>left</value>
+    <comment>Under the session's clock digits when there is no end time to name.</comment>
+  </data>
+  <data name="RemainingCaptionFormat" xml:space="preserve">
+    <value>left · {0}</value>
+    <comment>Under the session's clock digits. {0} is EndsAtFormat filled in, e.g. "until 14:13".</comment>
+  </data>
+  <data name="RemoveRuleFormat" xml:space="preserve">
+    <value>Remove {0}</value>
+    <comment>What a screen reader says for a remove button. {0} is the domain or the program.</comment>
+  </data>
+</root>
